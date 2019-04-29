@@ -9,7 +9,7 @@ module.exports = app => {
 
 router.get('/avaiable', (req, res, next) => {
 	try {
-		res.json(manager.list())
+		res.json(manager.getAvaiableTimes(req.query))
 	} catch (error) {
 		next(error)
 	}

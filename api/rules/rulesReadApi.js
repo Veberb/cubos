@@ -9,7 +9,7 @@ module.exports = app => {
 
 router.get('/', (req, res, next) => {
 	try {
-		res.json(manager.list(req.body))
+		res.json(manager.list())
 	} catch (error) {
 		next(error)
 	}
