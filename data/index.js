@@ -1,16 +1,34 @@
 const low = require('lowdb')
 const FileSync = require('lowdb/adapters/FileSync')
 const shortid = require('shortid')
-
 const adapter = new FileSync('db.json')
 const db = low(adapter)
 
 exports.create = ({ type, intervals, day, weeklyDay }) => {
-	const ruleId = db
+	const obj = {
+		id: shortid.generate(),
+		type,
+		intervals
+	}
+
+	if (day) obj.day = day
+	if (weeklyDay) obj.weeklyDay = weeklyDay
+	db
 		.get('rules')
-		.push({ id: shortid.generate(), type, intervals, day, weeklyDay })
+		.push(obj)
 		.write().id
-	console.log(ruleId)
+}
+
+exports.list = ({ day, types = [], weeklyDays = [] }) => {
+	return db
+		.get('rules')
+		.filter(
+			rule =>
+				rule.day === day ||
+				types.includes(rule.type) ||
+				weeklyDays.includes(rule.type)
+		)
+		.value()
 }
 
 exports.defaults = () => {

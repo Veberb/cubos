@@ -1,10 +1,8 @@
-const dataManager = require('../data')
+// const dataManager = require('../data')
+const validation = require('../utils/validation')
 // const type = ['day', 'weekly', 'daily']
 
-exports.create = ({ type, intervals, day, weeklyDay }) => {
-	console.log(type)
-	console.log(intervals)
-	console.log(day)
-	console.log(weeklyDay)
-	dataManager.create({ type, intervals, day, weeklyDay })
+exports.create = ({ type, intervals, day, weeklyDays }) => {
+	validation.validateRule({ type, intervals, day, weeklyDays })
+	// dataManager.create({ type, intervals, day, weeklyDay })
 }
