@@ -5,7 +5,7 @@ const Boom = require('boom')
 
 exports.create = ({ type, intervals, day, weeklyDays }) => {
 	validation.validateRule({ type, intervals, day, weeklyDays })
-	// dataManager.create({ type, intervals, day, weeklyDay })
+	// dataManager.create({ type, intervals, day, weeklyDays })
 }
 
 exports.remove = ({ id }) => {

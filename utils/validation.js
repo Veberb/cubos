@@ -22,12 +22,46 @@ exports.checkIntervals = ({ toIntervals, ruleIntervals }) => {
 			}
 		})
 	})
-	return true
 }
 
-exports.validateWeekly = () => {}
+exports.validateWeekly = ({ rule, day, type, intervals, weeklyDays }) => {
+	const dateRule = day ? moment(day, 'DD-MM-YYYY') : moment()
 
-exports.validateRule = ({ intervals, day, weeklyDays }) => {
+	for (let index = 0; index < rule.weeklyDays.length; index++) {
+		const weeklyDay = rule.weeklyDays[index]
+		if (['day', 'daily'].includes(type)) {
+			if (
+				dateRule.isoWeekday() ===
+				moment()
+					.day(weeklyDay)
+					.isoWeekday()
+			) {
+				exports.checkIntervals({
+					toIntervals: intervals,
+					ruleIntervals: rule.intervals
+				})
+				continue
+			}
+		}
+		weeklyDays.forEach(toWeeklyDay => {
+			if (
+				moment()
+					.day(weeklyDay)
+					.isoWeekday() ===
+				moment()
+					.day(toWeeklyDay)
+					.isoWeekday()
+			) {
+				exports.checkIntervals({
+					toIntervals: intervals,
+					ruleIntervals: rule.intervals
+				})
+			}
+		})
+	}
+}
+
+exports.validateRule = ({ intervals, type, day, weeklyDays }) => {
 	const checkDates = rule => {
 		switch (rule.type) {
 		case 'day':
@@ -38,7 +72,7 @@ exports.validateRule = ({ intervals, day, weeklyDays }) => {
 			})
 			break
 		default:
-			exports.validateWeekly({ rule, intervals, weeklyDays })
+			exports.validateWeekly({ rule, day, type, intervals, weeklyDays })
 			break
 		}
 	}
@@ -48,5 +82,6 @@ exports.validateRule = ({ intervals, day, weeklyDays }) => {
 		types: ['daily', 'weekly'],
 		weeklyDays
 	})
+
 	rules.forEach(checkDates)
 }

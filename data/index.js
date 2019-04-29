@@ -4,7 +4,7 @@ const shortid = require('shortid')
 const adapter = new FileSync('db.json')
 const db = low(adapter)
 
-exports.create = ({ type, intervals, day, weeklyDay }) => {
+exports.create = ({ type, intervals, day, weeklyDays }) => {
 	const obj = {
 		id: shortid.generate(),
 		type,
@@ -12,7 +12,7 @@ exports.create = ({ type, intervals, day, weeklyDay }) => {
 	}
 
 	if (day) obj.day = day
-	if (weeklyDay) obj.weeklyDay = weeklyDay
+	if (weeklyDays) obj.weeklyDays = weeklyDays
 	db
 		.get('rules')
 		.push(obj)
