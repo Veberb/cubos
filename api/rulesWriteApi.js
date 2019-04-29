@@ -14,3 +14,11 @@ router.post('/', (req, res, next) => {
 		next(error)
 	}
 })
+
+router.delete('/:id', (req, res, next) => {
+	try {
+		manager.remove(req.params)
+	} catch (error) {
+		next(error)
+	}
+})

@@ -31,6 +31,18 @@ exports.list = ({ day, types = [], weeklyDays = [] }) => {
 		.value()
 }
 
+exports.remove = ({ id }) => {
+	db.get('rules')
+		.remove({ id })
+		.write()
+}
+
+exports.get = ({ id }) =>
+	db
+		.get('rules')
+		.find({ id })
+		.value()
+
 exports.defaults = () => {
 	if (!db.has('rules').value()) db.set('rules', []).write()
 }
