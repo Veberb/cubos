@@ -14,3 +14,5 @@ exports.remove = ({ id }) => {
 
 	dataManager.remove({ id })
 }
+
+exports.list = () => dataManager.list({})
