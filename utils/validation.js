@@ -40,9 +40,10 @@ exports.validateWeekly = ({ rule, day, type, intervals, weeklyDays }) => {
 					toIntervals: intervals,
 					ruleIntervals: rule.intervals
 				})
-				continue
 			}
+			continue
 		}
+
 		weeklyDays.forEach(toWeeklyDay => {
 			if (
 				moment()
@@ -76,12 +77,10 @@ exports.validateRule = ({ intervals, type, day, weeklyDays }) => {
 			break
 		}
 	}
-
 	const rules = dataManager.list({
 		day,
 		types: ['daily', 'weekly'],
 		weeklyDays
 	})
-
 	rules.forEach(checkDates)
 }

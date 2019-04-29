@@ -26,7 +26,7 @@ exports.getAvaiableTimes = ({ start, end }) => {
 					if (
 						moment()
 							.day(day)
-							.isoWeekday() === moment().isoWeekday()
+							.isoWeekday() === moment(currentDate).isoWeekday()
 					)
 						intervalsToPush.push(...rule.intervals)
 				})
