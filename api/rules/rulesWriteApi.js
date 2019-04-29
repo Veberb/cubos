@@ -10,6 +10,7 @@ module.exports = app => {
 router.post('/', (req, res, next) => {
 	try {
 		manager.create(req.body)
+		res.json('Horário cadastrado com sucesso!')
 	} catch (error) {
 		next(error)
 	}

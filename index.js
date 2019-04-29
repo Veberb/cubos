@@ -6,6 +6,7 @@ const bodyParser = require('body-parser')
 const config = require('./config')
 
 const app = express()
+
 app.use(cors('*'))
 app.use(bodyParser.json({ limit: '50mb', type: 'application/json' }))
 
@@ -14,8 +15,8 @@ const apis = glob.sync(`${config.path}/**/*Api.js`)
 apis.forEach(apiPath => {
 	require(`${apiPath}`)(app)
 })
-
-app.use((err, req, res) => {
+//eslint-disable-next-line
+app.use((err, req, res, next) => {
 	const error = Boom.isBoom(err) ? err : Boom.boomify(err)
 	res
 		.status(error.output.statusCode)
