@@ -1,5 +1,5 @@
 const express = require('express')
-const manager = require('../manager/ruleManager')
+const manager = require('./ruleManager')
 
 const router = express.Router({ mergeParams: true })
 

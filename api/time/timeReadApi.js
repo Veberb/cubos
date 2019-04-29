@@ -1,15 +1,15 @@
 const express = require('express')
-const manager = require('../manager/ruleManager')
+const manager = require('./timeManager')
 
 const router = express.Router({ mergeParams: true })
 
 module.exports = app => {
-	app.use('/api/rules', router)
+	app.use('/api/times', router)
 }
 
-router.get('/', (req, res, next) => {
+router.get('/avaiable', (req, res, next) => {
 	try {
-		res.json(manager.list(req.body))
+		res.json(manager.list())
 	} catch (error) {
 		next(error)
 	}

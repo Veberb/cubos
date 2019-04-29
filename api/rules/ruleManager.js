@@ -1,5 +1,5 @@
-const dataManager = require('../data')
-const validation = require('../utils/validation')
+const dataManager = require('../../data')
+const validation = require('../../utils/validation')
 const Boom = require('boom')
 // const type = ['day', 'weekly', 'daily']
 
