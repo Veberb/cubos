@@ -1,5 +1,4 @@
 const moment = require('moment')
-const dataManager = require('../data')
 const Boom = require('boom')
 
 exports.checkIntervals = ({ toIntervals, ruleIntervals }) => {
@@ -60,27 +59,4 @@ exports.validateWeekly = ({ rule, day, type, intervals, weeklyDays }) => {
 			}
 		})
 	}
-}
-
-exports.validateRule = ({ intervals, type, day, weeklyDays }) => {
-	const checkDates = rule => {
-		switch (rule.type) {
-		case 'day':
-		case 'daily':
-			exports.checkIntervals({
-				toIntervals: intervals,
-				ruleIntervals: rule.intervals
-			})
-			break
-		default:
-			exports.validateWeekly({ rule, day, type, intervals, weeklyDays })
-			break
-		}
-	}
-	const rules = dataManager.list({
-		day,
-		types: ['daily', 'weekly'],
-		weeklyDays
-	})
-	rules.forEach(checkDates)
 }

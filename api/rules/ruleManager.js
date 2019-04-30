@@ -4,7 +4,27 @@ const Boom = require('boom')
 // const type = ['day', 'weekly', 'daily']
 
 exports.create = ({ type, intervals, day, weeklyDays }) => {
-	validation.validateRule({ type, intervals, day, weeklyDays })
+	const checkDates = rule => {
+		switch (rule.type) {
+		case 'day':
+		case 'daily':
+			validation.checkIntervals({
+				toIntervals: intervals,
+				ruleIntervals: rule.intervals
+			})
+			break
+		default:
+			validation.validateWeekly({ rule, day, type, intervals, weeklyDays })
+			break
+		}
+	}
+	const rules = dataManager.list({
+		day,
+		types: ['daily', 'weekly'],
+		weeklyDays
+	})
+	rules.forEach(checkDates)
+
 	return dataManager.create({ type, intervals, day, weeklyDays })
 }
 
