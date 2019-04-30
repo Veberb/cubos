@@ -1,7 +1,6 @@
 const dataManager = require('../../data')
 const validation = require('../../utils/validation')
 const Boom = require('boom')
-// const type = ['day', 'weekly', 'daily']
 
 exports.create = ({ type, intervals, day, weeklyDays }) => {
 	const checkDates = rule => {
@@ -24,7 +23,6 @@ exports.create = ({ type, intervals, day, weeklyDays }) => {
 		weeklyDays
 	})
 	rules.forEach(checkDates)
-
 	return dataManager.create({ type, intervals, day, weeklyDays })
 }
 
