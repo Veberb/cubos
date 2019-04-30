@@ -3,7 +3,6 @@
 - Ambiente
 
   - Node - v10.15.0
-  - Lowdb - 1.0.0
 
 - Endpoints
 
@@ -12,6 +11,9 @@
 - Dados:
 
   - Na raiz do projeto, será criado um arquivo chamado **db.json**, onde será salvo as informações geradas pelo sistema.
+  - Existem três tipos de regras: Day, Daily e Weekly.
+  - Quando a regra for do tipo `Weekly`, deve ser enviado um array com o nome dos dias da semana. Exemplo: ['Sunday'].
+  - Todos os dados estão exemplificados no postman.
 
 - Rodando o projeto
   - Na raiz do projeto, rodar comando `npm install` para instalar as dependencias do front e backend.
