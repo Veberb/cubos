@@ -117,7 +117,15 @@
 									"raw": ""
 								},
 								"url": {
-									"raw": ""
+									"raw": "localhost:3000/api/rules",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"rules"
+									]
 								}
 							},
 							"response": []
