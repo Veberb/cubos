@@ -9,6 +9,12 @@ module.exports = {
 		Atomics: 'readonly',
 		SharedArrayBuffer: 'readonly'
 	},
+	parserOptions: {
+		ecmaVersion: 6,
+		ecmaFeatures: {
+			experimentalObjectRestSpread: true
+		}
+	},
 	rules: {
 		indent: ['error', 'tab'],
 		'linebreak-style': ['error', 'unix'],
