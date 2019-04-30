@@ -1,10 +1,19 @@
 const low = require('lowdb')
 const FileSync = require('lowdb/adapters/FileSync')
 const shortid = require('shortid')
-const adapter = new FileSync('db.json')
+
+const dbPath = process.env.NODE_ENV === 'test' ? 'db-test.json' : 'db.json'
+
+const adapter = new FileSync(dbPath)
+
 const db = low(adapter)
 
-exports.create = ({ type, intervals, day, weeklyDays }) => {
+exports.create = ({
+	type,
+	intervals,
+	day,
+	weeklyDays
+}) => {
 	const obj = {
 		id: shortid.generate(),
 		type,
@@ -19,32 +28,48 @@ exports.create = ({ type, intervals, day, weeklyDays }) => {
 		.write().id
 }
 
-exports.list = ({ day, types = [], weeklyDays = [] }) => {
+exports.list = ({
+	day,
+	types = [],
+	weeklyDays = []
+}) => {
 	return db
 		.get('rules')
 		.filter(
 			rule =>
 				rule.day === day ||
-				types.includes(rule.type) ||
-				weeklyDays.includes(rule.type)
+			types.includes(rule.type) ||
+			weeklyDays.includes(rule.type)
 		)
 		.value()
 }
 
-exports.remove = ({ id }) => {
+exports.remove = ({
+	id
+}) => {
 	db.get('rules')
-		.remove({ id })
+		.remove({
+			id
+		})
 		.write()
 }
 
-exports.get = ({ id }) =>
+exports.get = ({
+	id
+}) =>
 	db
 		.get('rules')
-		.find({ id })
+		.find({
+			id
+		})
 		.value()
 
 exports.defaults = () => {
 	if (!db.has('rules').value()) db.set('rules', []).write()
+}
+
+exports.reset = () => {
+	db.set('rules', []).write()
 }
 
 exports.defaults()
