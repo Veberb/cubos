@@ -16,5 +16,10 @@
   - Todos os dados estão exemplificados no postman.
 
 - Rodando o projeto
+
   - Na raiz do projeto, rodar comando `npm install` para instalar as dependencias do front e backend.
   - Rodar o comando `npm start` para subir o backend disponível no endereço http://localhost:3000
+
+- Teste
+  - Para rodar o teste, rodar o comando `npm test`.
+  - O teste criado, verifica a criação de uma nova regra.
