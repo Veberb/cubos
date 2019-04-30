@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "env NODE_ENV=test mocha ./specs/*.spec.js ",
     "start": "nodemon --inspect index.js --config nodemon.json"
   },
   "repository": {
@@ -30,7 +30,10 @@
     "superstruct": "^0.6.1"
   },
   "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
     "eslint": "^5.16.0",
+    "mocha": "^6.1.4",
     "nodemon": "^1.18.11"
   }
 }
