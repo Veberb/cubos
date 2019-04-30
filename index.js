@@ -23,5 +23,5 @@ app.use((err, req, res, next) => {
 		.status(error.output.statusCode)
 		.json({ message: error.message, error: error.output.payload.error })
 })
-
+module.exports = app
 app.listen(3000)
