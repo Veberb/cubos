@@ -1,5 +1,6 @@
 const express = require('express')
 const Boom = require('boom')
+const morgan = require('morgan')
 const glob = require('glob')
 const cors = require('cors')
 const bodyParser = require('body-parser')
@@ -11,7 +12,7 @@ app.use(cors('*'))
 app.use(bodyParser.json({ limit: '50mb', type: 'application/json' }))
 
 const apis = glob.sync(`${config.path}/**/*Api.js`)
-
+app.use(morgan('dev'))
 apis.forEach(apiPath => {
 	require(`${apiPath}`)(app)
 })

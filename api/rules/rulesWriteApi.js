@@ -18,7 +18,7 @@ router.post(
 	}),
 	(req, res, next) => {
 		try {
-			manager.create(req.body)
+			manager.create({ ...req.validData })
 			res.json('Horário cadastrado com sucesso!')
 		} catch (error) {
 			next(error)
