@@ -1,18 +1,21 @@
 const moment = require('moment')
 const Boom = require('boom')
 
-exports.checkIntervals = ({ toIntervals, ruleIntervals }) => {
+exports.checkIntervals = ({
+	toIntervals,
+	ruleIntervals
+}) => {
 	const pattern = 'hh:mm'
 	ruleIntervals.forEach(ruleInterval => {
 		toIntervals.forEach(element => {
 			if (
 				moment(ruleInterval.start, pattern).isBetween(
 					moment(element.start, pattern),
-					moment(element.end, pattern)
+					moment(element.end, pattern), null, '[]'
 				) ||
 				moment(ruleInterval.end, pattern).isBetween(
 					moment(element.start, pattern),
-					moment(element.end, pattern)
+					moment(element.end, pattern), null, '[]'
 				)
 			) {
 				throw Boom.badRequest(
@@ -23,7 +26,13 @@ exports.checkIntervals = ({ toIntervals, ruleIntervals }) => {
 	})
 }
 
-exports.validateWeekly = ({ rule, day, type, intervals, weeklyDays }) => {
+exports.validateWeekly = ({
+	rule,
+	day,
+	type,
+	intervals,
+	weeklyDays
+}) => {
 	const dateRule = day ? moment(day, 'DD-MM-YYYY') : moment()
 
 	for (let index = 0; index < rule.weeklyDays.length; index++) {
